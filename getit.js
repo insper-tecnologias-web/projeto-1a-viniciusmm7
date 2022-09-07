@@ -6,16 +6,10 @@ function getRandomInt(min, max) {
 
 function showForm(id) {
   document.getElementById(`form-update-${id}`).style.display = 'block';
-  for (element of getElementsByClassName(`hide-${id}`)) {
-    element.style.display = 'none';
-  }
 }
 
 function hideForm(id) {
   document.getElementById(`form-update-${id}`).style.display = 'none';
-  for (element of getElementsByClassName(`hide-${id}`)) {
-    element.style.display = 'block';
-  }
 }
   
 document.addEventListener("DOMContentLoaded", function () {
