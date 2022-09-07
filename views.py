@@ -1,10 +1,16 @@
 from utils import build_response, load_template, Database, Note
 
 def index(request):
+
+    note_template = load_template('components/note.html')
+
     db = Database('banco')
     code = 200
     reason = 'OK'
     headers = ''
+
+    dados = db.get_all()
+    
     if request.startswith('POST'):
         request = request.replace('\r', '')
 
@@ -18,16 +24,26 @@ def index(request):
             valor = ' '.join(itens[1].split('+'))
             params[chave] = valor
             
-        db.add(Note(title=params['title'], content=params['content']))
+        if corpo.startswith('id-delete'):
+            db.delete(params['id-delete'])
+        
+        elif corpo.startswith('title'):
+            db.add(Note(title=params['title'], content=params['content']))
+
+        elif corpo.startswith('id-update'):
+            if not params['title'] or not params['content']:
+                None
+            else:
+                db.update(Note(id=int(params['id-update']), title=params['title'], content=params['content']))
+            
         code = 303
         reason = 'See Other'
         headers = 'Location: /'
 
     # Gerando o HTML das notas
-    note_template = load_template('components/note.html')
     notes_li = [
-        note_template.format(title=dados.title, content=dados.content)
-        for dados in db.get_all()
+        note_template.format(id=dado.id, title=dado.title, content=dado.content)
+        for dado in dados
     ]
     notes = '\n'.join(notes_li)
 

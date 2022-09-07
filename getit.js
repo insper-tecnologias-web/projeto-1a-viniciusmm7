@@ -3,6 +3,20 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function showForm(id) {
+  document.getElementById(`form-update-${id}`).style.display = 'block';
+  for (element of getElementsByClassName(`hide-${id}`)) {
+    element.style.display = 'none';
+  }
+}
+
+function hideForm(id) {
+  document.getElementById(`form-update-${id}`).style.display = 'none';
+  for (element of getElementsByClassName(`hide-${id}`)) {
+    element.style.display = 'block';
+  }
+}
   
 document.addEventListener("DOMContentLoaded", function () {
   // Faz textarea aumentar a altura automaticamente

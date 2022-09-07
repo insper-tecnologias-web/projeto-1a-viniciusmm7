@@ -13,10 +13,9 @@ class Note:
 class Database:
     def __init__(self, name:str):
         self.conn = sqlite3.connect(f'{name}.db')
-        c = self.conn.cursor()
-        c.execute('pragma encoding=UTF8')
-        rows = c.fetchall()
         self.conn.execute("CREATE TABLE IF NOT EXISTS note (id INTEGER PRIMARY KEY, title STRING, content STRING NOT NULL);")
+
+    get = lambda self, note_id: [Note(id=linha[0], title=linha[1], content=linha[2]) for linha in self.conn.execute(f"SELECT id, title, content FROM note WHERE id = {note_id}")][0]
 
     def add(self, note:Note):
         self.conn.execute(f"INSERT INTO note (title, content) VALUES ('{note.title}', '{note.content}');")
@@ -46,7 +45,7 @@ def read_file(path):
     return file
 
 def load_template(html_file):
-    with open(f'./templates/{html_file}', encoding='utf8') as f:
+    with open(f'./templates/{html_file}') as f:
         template = f.read()
         f.close()
     return template

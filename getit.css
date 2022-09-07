@@ -22,7 +22,6 @@ Algumas informações úteis e dicas:
   - Sombra: https://codepen.io/sdthornton/pen/wBZdXq
 */
 
-html,
 body {
   font-family: "Roboto", sans-serif;
   display: flex;
@@ -67,7 +66,7 @@ body {
   padding: .4em;
 }
 
-.form-card-title {
+.form-card-title{
   border-width: 0;
   font-size: large;
 }
@@ -89,6 +88,7 @@ textarea {
   font-weight: 500;
   background-color: #f7d736;
   box-shadow: 0 .1em .2em 0 #888;
+  width: 100%;
 }
 
 .card-container{
@@ -111,6 +111,7 @@ textarea {
   width: 13em;
   margin: 1em;
   gap: 1.8em;
+  overflow-wrap: break-word;
 }
 
 .card-title {
@@ -132,17 +133,31 @@ textarea {
   right: .5em;
 }
 
-.trash-btn {
+.plus-form-btn {
+  position: absolute;
+  top: .6em;
+  right: 3em;
+}
+
+.btn2 {
   border-width: 0;
   background-color: rgba(0,0,0,0);
   opacity: 0%;
 }
 
-.card:hover .trash-btn {
+.card:hover .btn2 {
   border-width: 0;
   background-color: rgba(0,0,0,0);
   opacity: 100%;
   transition: .2s;
+}
+
+.update-abort-btn {
+  background-color: red;
+}
+
+.update-cancel-btn {
+  background-color: green;
 }
 
 /* CORES NOTAS */
