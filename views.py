@@ -1,6 +1,6 @@
 from utils import build_response, load_template, Database, Note
 
-def index(request):
+def index(request:str):
 
     note_template = load_template('components/note.html')
 
@@ -55,3 +55,6 @@ def index(request):
             notes=notes
         )
     )
+
+# 404 Not Found
+not_found = lambda: build_response(code=404, reason='Not Found', headers='Location: /', body=load_template('404.html'))
